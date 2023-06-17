@@ -16,6 +16,7 @@ local UIAspectRatioConstraint_2 = Instance.new("UIAspectRatioConstraint")
 RadarGui.Name = "Radar"
 RadarGui.Parent = game.CoreGui
 RadarGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+getgenv().RadarUI = RadarGui
 
 Background.Name = "Background"
 Background.Parent = RadarGui
