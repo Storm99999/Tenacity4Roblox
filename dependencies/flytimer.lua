@@ -63,3 +63,5 @@ function module:StartTimer()
       end
     end  
 end
+
+return module
