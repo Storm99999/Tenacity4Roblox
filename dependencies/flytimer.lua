@@ -46,6 +46,7 @@ end
 
 function module:StartTimer()
     local script = uh
+    uh.Visible = true
     local waitvalue = 2
 
     for i = 0, 19 do
