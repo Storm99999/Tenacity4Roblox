@@ -138,23 +138,21 @@ function funcs:getRaycastInstance()
 end
 
 function funcs:getInventory()
-    for _, v in next, game.ReplicatedStorage.Inventories:GetChildren() do
-        if v.Name == game.Players.LocalPlayer.Name then
-            for index2, val2 in next, v:GetChildren() do
-                if string.find(val2.Name, 'pickaxe') then
-                    return v
-                end
-            end
-        end
-    end
+    for _,v in next, game.ReplicatedStorage.Inventories:GetChildren() do
+		if v.Name == game.Players.LocalPlayer.Name then
+			for i2,v2 in next, v:GetChildren() do
+				if tostring(v2.Name):find("pickaxe") then
+					return v
+				end
+			end
+		end
+	end
 end
 
 function funcs:hasItem(item)
     if funcs:getInventory():FindFirstChild(item) then
-        return true, 1
+        return true
     end
-
-    return false
 end
 
 function funcs:getCurrentMap()
