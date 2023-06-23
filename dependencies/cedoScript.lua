@@ -125,7 +125,7 @@ function funcs:getAliveStateOf(plr)
 end
 
 function funcs:getFlagState()
-    return (funcs.getNetworkFunction(game.Players.LocalPlayer.Character.HumanoidRootPart) and false or true)
+    return (funcs.getNetworkFunction(game.Players.LocalPlayer.Character.HumanoidRootPart))
 end
 
 function funcs:getRaycastInstance()
@@ -167,6 +167,12 @@ function funcs:getCurrentMap()
             end
         end
     end
+end
+
+function funcs:createFakeAsset(data)
+    local getasset = (getsynasset or getcustomasset)
+
+    return getasset(data)
 end
 
 function funcs:fetchBeds()
@@ -285,5 +291,5 @@ function b64:revertData(data)
         end
     ))
 end
-
+getgenv().cedoscript = cedoscript
 return cedoscript
