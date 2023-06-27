@@ -166,7 +166,7 @@ function render:renderModel(model_data, models, isMesh)
                                     end
                                 end
 
-                                local sword = (v.model:Clone() or Instance.new("Part"))
+                                local sword = (v.Model:Clone() or Instance.new("Part"))
                                 if not isMesh then
                                     for __, vparts in next, sword:GetChildren() do
                                         vparts.Anchored = true
