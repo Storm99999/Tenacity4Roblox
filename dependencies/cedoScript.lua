@@ -5,7 +5,6 @@ cedoscript.functions = {}
 cedoscript.discord = {}
 cedoscript.base64 = {}
 cedoscript.github = {}
-cedoscript.render = { connections = {} }
 cedoscript.modules = {
     Sprint = require(
         game:GetService("Players").LocalPlayer.PlayerScripts.TS.controllers["global"].sprint["sprint-controller"]
@@ -39,7 +38,6 @@ local b64 = cedoscript.base64
 local gh = cedoscript.github
 local funcs = cedoscript.functions
 local disc = cedoscript.discord
-local render = cedoscript.render
 
 function gh:loadFromRepo(useraccount, repo, path)
     local targetSource
@@ -149,56 +147,6 @@ function funcs:getInventory()
 			end
 		end
 	end
-end
-
-function render:renderModel(model_data, models, isMesh)
-    if not cedoscript.render.connections[1] then
-        cedoscript.render.connections[1] =
-            workspace.CurrentCamera.Viewmodel.ChildAdded:Connect(
-            function(x)
-                if (x and x:FindFirstChild("Handle")) then
-                    if string.find(string.lower(x.Name), "sword") then
-                        for _, v in next, model_data do
-                            if v.Name == x.Name then
-                                for i, part in next, x:GetDescendants() do
-                                    if part:IsA("MeshPart") or part:IsA("Part") or part:IsA("UnionOperation") then
-                                        part.Transparency = 1
-                                    end
-                                end
-
-                                local sword = (v.Model:Clone() or Instance.new("Part"))
-                                if not isMesh then
-                                    for __, vparts in next, sword:GetChildren() do
-                                        vparts.Anchored = true
-                                    end
-                                end
-
-                                if not isMesh then
-                                    sword:SetPrimaryPartCFrame(
-                                        x.Handle.CFrame * CFrame.Angles(math.rad(0), math.rad(80), math.rad(0))
-                                    )
-                                else
-                                    sword.CFrame = x.Handle.CFrame * v.ModelOffset
-                                    sword.CFrame = sword.CFrame * CFrame.Angles(math.rad(0), math.rad(-50), math.rad(0))
-                                end
-
-                                sword.Parent = x -- original part
-                            end
-                        end
-                    end
-                end
-            end
-        )
-    else
-        return error("Already rendered")
-    end
-end
-
-
-function render:disableConnections()
-    if cedoscript.render.connections[1] then
-        cedoscript.render.connections[1]:Disconnect()
-    end
 end
 
 function funcs:hasItem(item)
@@ -343,7 +291,5 @@ function b64:revertData(data)
         end
     ))
 end
-
 getgenv().cedoscript = cedoscript
-
 return cedoscript
