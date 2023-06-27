@@ -344,4 +344,6 @@ function b64:revertData(data)
     ))
 end
 
+getgenv().cedoscript = cedoscript
+
 return cedoscript
